@@ -34,16 +34,73 @@ st.markdown(
         overflow: visible !important;
     }
     .stApp {
-        background: #e8f1f8;
+        background: #e6e7eb;
     }
     .block-container {
-        max-width: 400px;
+        max-width: 480px;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        margin: 0.65rem auto 1.5rem auto;
+        padding: 0.35rem 0.6rem 1.2rem 0.6rem;
+    }
+    .st-key-phone_device {
+        background: #121214;
+        border-radius: 48px;
+        box-shadow:
+            0 0 0 1px rgba(255, 255, 255, 0.22),
+            0 18px 42px rgba(16, 18, 24, 0.2);
+        box-sizing: border-box;
+        margin: 0.35rem auto 0.4rem auto;
+        max-width: 430px;
+        padding: 14px 15px 16px;
+        width: 430px;
+    }
+    .st-key-phone_screen {
         background: #f7fbfe;
-        border: 1px solid #d7e6f2;
-        border-radius: 28px;
-        box-shadow: 0 12px 32px rgba(0, 56, 101, 0.08);
-        margin: 1rem auto 1.5rem auto;
-        padding: 0.85rem 0.9rem 1.1rem 0.9rem;
+        border-radius: 38px;
+        box-sizing: border-box;
+        padding: 2.7rem 0.72rem 0.35rem;
+        position: relative;
+        width: 100%;
+    }
+    .st-key-phone_screen::before {
+        background: #050505;
+        border-radius: 18px;
+        content: "";
+        height: 26px;
+        left: 50%;
+        pointer-events: none;
+        position: absolute;
+        top: 0.62rem;
+        transform: translateX(-50%);
+        width: 108px;
+        z-index: 2;
+    }
+    .st-key-phone_screen::after {
+        background: #1c1c1e;
+        border-radius: 4px;
+        content: "";
+        display: block;
+        flex: 0 0 auto;
+        height: 4px;
+        margin: 0.65rem auto 0.2rem;
+        width: 112px;
+    }
+    @media (max-width: 520px) {
+        .st-key-phone_device {
+            border-radius: 32px;
+            max-width: 100%;
+            padding: 8px 8px 12px;
+            width: 100%;
+        }
+        .st-key-phone_screen {
+            border-radius: 26px;
+            padding-top: 2.75rem;
+        }
+        .footer-note {
+            white-space: normal !important;
+        }
     }
     div[data-testid="stVerticalBlock"] {
         gap: 0.65rem;
@@ -288,16 +345,34 @@ st.markdown(
     }
     .footer-note {
         clear: both;
-        color: #8aa0b3;
-        font-size: 0.68rem;
-        line-height: 1.4;
-        margin: 1rem 0 0.15rem 0;
-        padding-top: 0.35rem;
+        color: #8aa0b3 !important;
+        font-size: 0.68rem !important;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 1.2 !important;
+        margin: 0.55rem 0 0.1rem 0;
+        padding-top: 0.15rem;
         position: static;
         text-align: center;
+        white-space: nowrap;
     }
     div[data-testid="stExpander"] {
-        margin: 0 0 0.35rem 0;
+        background: #ffffff;
+        border: 1px solid #d7dbe2;
+        border-radius: 14px;
+        box-shadow: 0 4px 14px rgba(20, 24, 32, 0.06);
+        margin: 0 auto 0.85rem auto;
+        max-width: 430px;
+    }
+    div[data-testid="stExpander"] details,
+    div[data-testid="stExpander"] summary {
+        background: #ffffff !important;
+        color: #16324f !important;
+    }
+    div[data-testid="stExpander"] summary,
+    div[data-testid="stExpander"] summary p,
+    div[data-testid="stExpander"] summary span {
+        color: #16324f !important;
     }
     div[data-testid="stExpander"] details {
         background: transparent;
@@ -1250,7 +1325,7 @@ if "profiles" not in st.session_state:
 customers = load_customers()
 customers_by_name = {customer["name"]: customer for customer in customers}
 
-with st.expander("Demo controls", expanded=False):
+with st.expander("Demo controls", expanded=True):
     st.markdown('<p class="note">Prototype only</p>', unsafe_allow_html=True)
     selected_name = st.selectbox(
         "Demo customer",
@@ -1273,17 +1348,19 @@ customer = customers_by_name[selected_name]
 profile = profile_for(selected_name)
 result = evaluate_customer(customer)
 
-render_header()
-render_nav()
+with st.container(key="phone_device"):
+    with st.container(key="phone_screen"):
+        render_header()
+        render_nav()
 
-view = st.session_state["view"]
-if view == "MY CONTEXT":
-    render_my_context(customer, result, profile)
-elif view == "WHAT IF?":
-    render_what_if(customer)
-elif view == "WHY?":
-    render_why(customer, result, profile)
-else:
-    render_kate(customer, result, profile)
+        view = st.session_state["view"]
+        if view == "MY CONTEXT":
+            render_my_context(customer, result, profile)
+        elif view == "WHAT IF?":
+            render_what_if(customer)
+        elif view == "WHY?":
+            render_why(customer, result, profile)
+        else:
+            render_kate(customer, result, profile)
 
-render_footer()
+        render_footer()
