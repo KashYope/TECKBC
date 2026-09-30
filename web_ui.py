@@ -67,7 +67,7 @@ class WebUI:
             value = options[0]
         self.session_state[key] = value
         options_html = ''.join(f'<option value="{escape(option)}"'+(' selected' if option == value else '')+f'>{escape(option)}</option>' for option in options)
-        self.parts.append(f'<label>{escape(label)}<select name="{escape(key)}" onchange="this.form.requestSubmit()">{options_html}</select></label>')
+        self.parts.append(f'<label for="{escape(key)}">{escape(label)}</label><select id="{escape(key)}" name="{escape(key)}" onchange="this.form.requestSubmit()">{options_html}</select>')
         return value
 
     def number_input(self, label, min_value=0, step=1, key=None, **kwargs):
