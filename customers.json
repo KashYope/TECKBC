@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Emma",
+    "scenario": "Primary KBC customer",
+    "monthly_income": 3000,
+    "essential_expenses": 1400,
+    "discretionary_expenses": 500,
+    "monthly_debt_payments": 0,
+    "kbc_savings": 12000,
+    "recurring_external_transfer": 0,
+    "external_transfer_direction": "none",
+    "salary_detected_at_kbc": true,
+    "living_expenses_detected_at_kbc": true
+  },
+  {
+    "id": 2,
+    "name": "Lucas",
+    "scenario": "KBC used mainly for savings",
+    "monthly_income": 0,
+    "essential_expenses": 50,
+    "discretionary_expenses": 80,
+    "monthly_debt_payments": 0,
+    "kbc_savings": 15000,
+    "recurring_external_transfer": 1000,
+    "external_transfer_direction": "incoming",
+    "salary_detected_at_kbc": false,
+    "living_expenses_detected_at_kbc": false
+  },
+  {
+    "id": 3,
+    "name": "Sophie",
+    "scenario": "Financially constrained primary KBC customer",
+    "monthly_income": 2000,
+    "essential_expenses": 1450,
+    "discretionary_expenses": 300,
+    "monthly_debt_payments": 150,
+    "kbc_savings": 400,
+    "recurring_external_transfer": 0,
+    "external_transfer_direction": "none",
+    "salary_detected_at_kbc": true,
+    "living_expenses_detected_at_kbc": true
+  }
+]
